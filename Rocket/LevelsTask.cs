@@ -5,48 +5,46 @@ namespace func_rocket
 {
 	public class LevelsTask
 	{
-		static readonly Physics standardPhysics = new Physics();
+		static readonly Physics NormPhysics = new Physics();
 
-		public static Vector Hole = new Vector(500, 100);
-		public static Rocket standardRocket = new Rocket(new Vector(200, 500), Vector.Zero, -0.5 * Math.PI);
+		public static Vector Hole = new Vector(600, 200);
+		public static Rocket NormRocket = new Rocket(new Vector(200, 500), Vector.Zero, -0.5 * Math.PI);
 
 		public static IEnumerable<Level> CreateLevels()
 		{
 			yield return new Level("Zero",
-				standardRocket,
-				new Vector(600, 200),
+				NormRocket,
+				Hole,
 				(size, v) => Vector.Zero,
-				standardPhysics);
+				NormPhysics);
 			yield return new Level("Heavy",
-				standardRocket,
-				new Vector(600, 200),
+				NormRocket,
+				Hole,
 				(size, v) => new Vector(0, 0.9),
-				standardPhysics);
+				NormPhysics);
 			yield return new Level("Up",
-				standardRocket,
+				NormRocket,
 				new Vector(700, 500),
 				(size, v) => new Vector(0, -300 / (size.Height - v.Y + 300.0)),
-				standardPhysics);
+				NormPhysics);
 
 			Func<Vector, double, Vector> force = (dv, k) => dv.Normalize() * (k * dv.Length / (dv.Length * dv.Length + 1));
 			yield return new Level("WhiteHole",
-				standardRocket,
+				NormRocket,
 				Hole,
 				(size, v) => force(v - Hole, 140),
-				standardPhysics);
+				NormPhysics);
 			var blackHole = 0.5 * (Hole + new Vector(200, 500));
 			yield return new Level("BlackHole",
-				standardRocket,
+				NormRocket,
 				Hole,
 				(size, v) => force(blackHole - v, 300),
-				standardPhysics);
+				NormPhysics);
 			yield return new Level("BlackAndWhite",
-				standardRocket,
+				NormRocket,
 				Hole,
 				(size, v) => (force(v - Hole, 140) + force(blackHole - v, 300)) / 2,
-				standardPhysics);
+				NormPhysics);
 		}
-
-
 	}
 }

@@ -63,6 +63,9 @@
       <SubType>Component</SubType>
     </Compile>
     <Content Include="Dungeons\BigTestDungeon.txt" />
+    <Content Include="Dungeons\Dungeon5.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Dungeons\Dungeon4.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

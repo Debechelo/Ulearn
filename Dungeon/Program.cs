@@ -8,6 +8,7 @@ namespace Dungeon
 		[STAThread]
 		public static void Main()
 		{
+
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
 			var form = new DungeonForm();
