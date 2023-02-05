@@ -1,14 +1,14 @@
-﻿using System.Threading.Tasks;
-using Tasks_for_the_seminar;
+﻿using Tasks_for_the_seminar;
 
 internal class Program {
     private static void Main(string[] args) {
         //SolvingTheTasksOfTheSeminar1();
         //SolvingTheTasksOfTheSeminar2();
-        SolvingTheTasksOfTheSeminar3();
+        //SolvingTheTasksOfTheSeminar3();
+        SolvingTheTasksOfTheSeminar4();
     }
 
-    private static void SolvingTheTasksOfTheSeminar1(){
+    private static void SolvingTheTasksOfTheSeminar1() {
         Console.WriteLine(Seminar1.Expr1(2, 3));
         Console.WriteLine(Seminar1.Expr2(243));
         Console.WriteLine(Seminar1.Expr3(20));
@@ -41,8 +41,15 @@ internal class Program {
         Console.WriteLine(Seminar3.Cond5(46, 38, 5));
         Console.WriteLine(Seminar3.Cond5(68, 41, 3));
         Console.WriteLine(Seminar3.Cond5(35, 12, 1));
-        Console.WriteLine(Seminar3.Cond6((0,0),(1,1),(2,2)));
+        Console.WriteLine(Seminar3.Cond6((0, 0), (1, 1), (2, 2)));
         Console.WriteLine(Seminar3.Cond7(12, 9.5, 2.0));
     }
 
+    private static void SolvingTheTasksOfTheSeminar4() {
+        Console.WriteLine(Seminar4.Loops1(12345));
+        Console.WriteLine(Seminar4.Loops2(27));
+        Console.WriteLine(Seminar4.Loops3(17));
+        Console.WriteLine(Seminar4.Loops4(new int[] { 3, 1, 1, 1, 1, 1, 5, 1, 1, 1, 4 }));
+        Console.WriteLine(Seminar4.Loops5("()(((()()))(()))()"));
+    }
 }
