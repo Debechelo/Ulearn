@@ -1,9 +1,8 @@
-﻿internal class Program {
-    private static void Main(string[] args) {
-        Console.WriteLine("Hello, World!");
-    }
+﻿using System;
+using System.Collections.Generic;
 
-    // функции, определяющей, является ли год високосным,
+namespace Tasks_for_the_seminar;
+internal class Seminar3 {
     public static bool IsLeapYear(int year) {
         return year % 4 == 0 && year % 100 != 0 || year % 400 == 0;
     }
@@ -94,18 +93,72 @@
      * пути длиной K километров (K ≤ L) проезжать ровно за H часов.
      * Какое минимальное и максимальное время для этого понадобится?
      */
-    public static bool Cond5(int x, int y, int z, int a, int b) {
-        return (x <= a && y <= b) || (x <= b && y <= a)
-                || (x <= a && z <= b) || (x <= b && z <= a)
-                || (z <= a && y <= b) || (z <= b && y <= a);
+    public static int Cond5(int l, int k, int h) {
+        return (int)Math.Ceiling((l / (double)k)) * h;
     }
 
     /*
      * Cond6. * Заданы координаты трех точек на плоскости.
      * Являются ли они вершинами квадрата? Если да, то найти координаты четвертой вершины.
      */
+    public static (int, int) Cond6((int, int) a, (int, int) b, (int, int) c) {
+        (int, int) abVector = GetVector(a, b);
+        (int, int) acVector = GetVector(a, c);
+        (int, int) bcVector = GetVector(b, c);
+        if(!ItsRectangle(abVector, acVector, bcVector)) {
+            Console.Write("Не квадрат");
+            return (0, 0);
+        }
 
+        (int, int) mid, point1, point2;
+        if(GetDistanseVector(abVector) == GetDistanseVector(acVector)) {
+            mid = a;
+            point1 = b;
+            point2 = c;
+        } else if(GetDistanseVector(abVector) == GetDistanseVector(bcVector)) {
+            mid = b;
+            point1 = a;
+            point2 = c;
+        } else {
+            mid = c;
+            point1 = a;
+            point2 = b;
+        }
 
+        (int, int) vector1 = GetVector(mid, point1);
+        (int, int) vector2 = GetVector(mid, point2);
+
+        return (mid.Item1 + vector1.Item1 + vector2.Item1, mid.Item2 + vector1.Item2 + vector2.Item2);
+    }
+
+    public static bool ItsRectangle((int, int) abVector, (int, int) acVector, (int, int) bcVector) {
+
+        if(GetDistanseVector(abVector) != GetDistanseVector(acVector)
+            && GetDistanseVector(abVector) != GetDistanseVector(bcVector)
+            && GetDistanseVector(acVector) != GetDistanseVector(bcVector))
+            return false;
+
+        if(ScalarProduct(abVector, acVector) != 0 && ScalarProduct(abVector, bcVector) != 0
+            && ScalarProduct(acVector, bcVector) != 0)
+            return false;
+        return true;
+    }
+
+    private static double GetDistanse((int, int) point1, (int, int) point2) {
+        return Math.Sqrt((point1.Item1 - point2.Item1) * (point1.Item1 - point2.Item1)
+            + (point1.Item2 - point2.Item2) * (point1.Item2 - point2.Item2));
+    }
+    private static double GetDistanseVector((int, int) vector) {
+        return Math.Sqrt(vector.Item1 * vector.Item1 + vector.Item2 * vector.Item2);
+    }
+
+    private static (int, int) GetVector((int, int) point1, (int, int) point2) {
+        return (point2.Item1 - point1.Item1, point2.Item2 - point1.Item2);
+    }
+
+    private static int ScalarProduct((int, int) vector1, (int, int) vector2) {
+        return vector1.Item1 * vector2.Item1 + vector1.Item2 - vector2.Item2;
+    }
     /*
      * Cond7. ** (1484. Кинорейтинг)
      * На сайте за фильм проголосовало N человек, каждый поставил оценку от 1 до 10.
@@ -114,4 +167,17 @@
      * Сколько минимум раз нужно поставить фильму оценку 1, чтобы его рейтинг гарантированно 
      * стал не выше Y? В решении нельзя использовать циклы.
      */
+
+    public static int Cond7(int N, double X, double Y) {
+        if (Y == 1) return 0;
+        int count = (int)((Y - X) * N / (1 - Y));
+        double O = Y;
+        while(Math.Round(O) == Y) {
+            count--;
+            O = (X * N + count) / (N + count);
+        }
+        count++;
+        return count;
+    }
+
 }
