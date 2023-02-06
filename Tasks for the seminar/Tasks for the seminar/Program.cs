@@ -1,11 +1,13 @@
-﻿using Tasks_for_the_seminar;
+﻿using System;
+using Tasks_for_the_seminar;
 
 internal class Program {
     private static void Main(string[] args) {
         //SolvingTheTasksOfTheSeminar1();
         //SolvingTheTasksOfTheSeminar2();
         //SolvingTheTasksOfTheSeminar3();
-        SolvingTheTasksOfTheSeminar4();
+        //SolvingTheTasksOfTheSeminar4();
+        SolvingTheTasksOfTheSeminar5();
     }
 
     private static void SolvingTheTasksOfTheSeminar1() {
@@ -51,5 +53,34 @@ internal class Program {
         Console.WriteLine(Seminar4.Loops3(17));
         Console.WriteLine(Seminar4.Loops4(new int[] { 3, 1, 1, 1, 1, 1, 5, 1, 1, 1, 4 }));
         Console.WriteLine(Seminar4.Loops5("()(((()()))(()))()"));
+    }
+
+    private static void SolvingTheTasksOfTheSeminar5() {
+        Console.WriteLine(Seminar5.Arr1(new int[] { 1, 2, 3,4,5,6,7,8,9 } ,8));
+        var arr1 = Seminar5.Arr2Combin(new int[] { 1, 3, 4, 6, 7, 9 }, new int[] { 3, 5, 6, 7, 8 });
+        for(int i = 0; i < arr1.Count; i++) {
+            Console.Write(arr1[i]);
+        }
+        Console.WriteLine();
+        var arr2 = Seminar5.Arr2Intersection(new int[] { 1, 3, 4, 6, 7, 9 }, new int[] { 3, 5, 6, 7, 8 });
+        for(int i = 0; i < arr2.Count; i++) {
+            Console.Write(arr2[i]);
+        }
+        Console.WriteLine();
+        var arr3 = Seminar5.Arr2Sub(new int[] { 1, 3, 4, 6, 7, 9 }, new int[] { 3, 5, 6, 7, 8 });
+        for(int i = 0; i < arr3.Count; i++) {
+            Console.Write(arr3[i]);
+        }
+        Console.WriteLine();
+        var arr4 = Seminar5.Arr3(new int[] { 1, 0, 1, 1 }, 2, 5);
+        for(int i = 0; i < arr4.Count; i++) {
+            Console.Write(arr4[i]);
+        }
+        Console.WriteLine();
+        Console.WriteLine(Seminar5.Arr4(1 ,6));
+        var arr5 = Seminar5.Arr5(new int[] { 1, 3, 4, 6, 7, 9 });
+        for(int i = 0; i < arr5.Count; i++) {
+            Console.Write(arr5[i] + " ");
+        }
     }
 }
