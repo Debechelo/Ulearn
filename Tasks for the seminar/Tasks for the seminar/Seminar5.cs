@@ -122,7 +122,7 @@ internal static class Seminar5 {
      * Найти наименьшее положительное целое число, не представимое в виде суммы 
      * элементов этого массива (каждый элемент разрешается использовать в сумме только один раз).
      */
-    public static List<int> Arr5(int[] array) {
+    public static int Arr5(int[] array) {
         List<int> list = new List<int>(array.Length);
         for(int i = 0; i < array.Length; i++) {
             int k = array[i];
@@ -132,13 +132,7 @@ internal static class Seminar5 {
                 k += array[j];
             }
         }
-        return list;
+        list.Sort();
+        return list[0] - 1;
     }
-
-    /* 
-     * Arr6. 1139. Городские кварталы
-     * 
-     * 
-     * Arr7. 1490. Огненный круг
-     */
 }
