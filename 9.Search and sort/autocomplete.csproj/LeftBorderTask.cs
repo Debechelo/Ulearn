@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace Autocomplete {
@@ -25,10 +26,11 @@ namespace Autocomplete {
 
             if(left + 1 == right)
                 return left;
-            int m = left + (right - left) / 2;
-            if(string.Compare(prefix, phrases[m], StringComparison.OrdinalIgnoreCase) > 0)
-                return GetLeftBorderIndex(phrases, prefix, m, right);
-            return GetLeftBorderIndex(phrases, prefix, left, m);
+            int middle = left + (right - left) / 2;
+            if(string.Compare(prefix, phrases[middle], StringComparison.OrdinalIgnoreCase) > 0 
+                && !phrases[middle].StartsWith(prefix))
+                return GetLeftBorderIndex(phrases, prefix, middle, right);
+            return GetLeftBorderIndex(phrases, prefix, left, middle);
         }
     }
 }

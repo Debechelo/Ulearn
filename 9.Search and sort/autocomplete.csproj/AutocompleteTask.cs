@@ -30,8 +30,15 @@ namespace Autocomplete
         /// <remarks>Эта функция должна работать за O(log(n) + count)</remarks>
         public static string[] GetTopByPrefix(IReadOnlyList<string> phrases, string prefix, int count)
         {
-            // тут стоит использовать написанный ранее класс LeftBorderTask
-            return null;
+            int realCount = GetCountByPrefix(phrases, prefix);
+            string[] top = new string[Math.Min(realCount, count)];
+            int left = LeftBorderTask.GetLeftBorderIndex(phrases, prefix, -1, phrases.Count);
+
+            for(int i = 0; i < realCount && i < count; i++) {
+                top[i] = phrases[left + i + 1];
+            }
+
+            return top;
         }
 
         /// <returns>
@@ -39,8 +46,9 @@ namespace Autocomplete
         /// </returns>
         public static int GetCountByPrefix(IReadOnlyList<string> phrases, string prefix)
         {
-            // тут стоит использовать написанные ранее классы LeftBorderTask и RightBorderTask
-            return -1;
+            int left = LeftBorderTask.GetLeftBorderIndex(phrases, prefix, -1, phrases.Count);
+            int right = RightBorderTask.GetRightBorderIndex(phrases, prefix, -1, phrases.Count);
+            return right - left == 1 ? 0 : right - left - 1; 
         }
     }
 

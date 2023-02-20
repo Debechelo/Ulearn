@@ -24,25 +24,21 @@ namespace TableParser {
             var resultToken = new StringBuilder();
             var currentIndex = startIndex;
             char startChar = line[currentIndex];
-            bool flag = false;
-            if(startChar == '\'' || startChar == '"') {
-                currentIndex++;
-                flag = true;
-            }
+            currentIndex++;
 
             while(currentIndex < line.Length) {
                 currentIndex++;
-                if(line[currentIndex - 1] == '\\' && currentIndex < line.Length
-                    && line[currentIndex] == '\'') {
+                if(line[currentIndex - 1] == '\\' && (line[currentIndex] == '\''
+                    || line[currentIndex] == '\"' || line[currentIndex] == '\\')) {
                     resultToken.Append(line[currentIndex]);
                     currentIndex++;
                     continue;
                 }
-                if(flag && line[currentIndex - 1] == startChar)
+                if(line[currentIndex - 1] == startChar)
                     break;
                 resultToken.Append(line[currentIndex - 1]);
             }
-            return new Token(resultToken.ToString().Trim(' '), startIndex, currentIndex - startIndex);
+            return new Token(resultToken.ToString(), startIndex, currentIndex - startIndex);
         }
     }
 }
